@@ -42,7 +42,7 @@ public class CalculadoraDeCompraTest {
 	}
 
 	@Test
-	public void valorDeveSubtrair005ParaItensAte500() {
+	public void valorDeveSubtrair005ParaValorAte500() {
 		compra = new CompraBuilder().add(1).add(498).build();
 		desconto = new DescontoPorValor();
 		calc = new CalculadoraDeCompra(compra, frete, desconto);
@@ -52,7 +52,7 @@ public class CalculadoraDeCompraTest {
 	}
 
 	@Test
-	public void valorDeveSubtrair005Para500Itens() {
+	public void valorDeveSubtrair005ParaValorDe500() {
 		compra = new CompraBuilder().add(1).add(498).add(1).build();
 		desconto = new DescontoPorValor();
 		calc = new CalculadoraDeCompra(compra, frete, desconto);
@@ -62,12 +62,42 @@ public class CalculadoraDeCompraTest {
 	}
 
 	@Test
-	public void valorDeveSubtrair010ParaMaisQue500Itens() {
+	public void valorDeveSubtrair010ParaValorMaiorQue500() {
 		compra = new CompraBuilder().add(500).add(1).build();
 		desconto = new DescontoPorValor();
 		calc = new CalculadoraDeCompra(compra, frete, desconto);
 		valor = calc.calcula();
 
 		Assert.assertEquals(501.0 * 0.90, valor, 0.001);
+	}
+
+	@Test
+	public void valorDeveSubtrair010ParaValorAte2000() {
+		compra = new CompraBuilder().add(1999).build();
+		desconto = new DescontoPorValor();
+		calc = new CalculadoraDeCompra(compra, frete, desconto);
+		valor = calc.calcula();
+
+		Assert.assertEquals(1999.0 * 0.90, valor, 0.001);
+	}
+
+	@Test
+	public void valorDeveSubtrair010ParaValorDe2000() {
+		compra = new CompraBuilder().add(2000).build();
+		desconto = new DescontoPorValor();
+		calc = new CalculadoraDeCompra(compra, frete, desconto);
+		valor = calc.calcula();
+
+		Assert.assertEquals(2000.0 * 0.90, valor, 0.001);
+	}
+
+	@Test
+	public void valorDeveSubtrair015ParaValorMaiorQue2000() {
+		compra = new CompraBuilder().add(2001).build();
+		desconto = new DescontoPorValor();
+		calc = new CalculadoraDeCompra(compra, frete, desconto);
+		valor = calc.calcula();
+
+		Assert.assertEquals(2001.0 * 0.85, valor, 0.001);
 	}
 }
