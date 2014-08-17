@@ -18,11 +18,20 @@ public class CalculadoraDeCompraTest {
 	}
 
 	@Test
-	public void valorDeveSumarOsItens() {
+	public void valorDeveSerSumaDosItens() {
 		compra = new CompraBuilder().add(10).add(20).add(30).build();
 
 		valor = calc.calcula(compra);
 
 		Assert.assertEquals(60.0, valor, 0.001);
+	}
+
+	@Test
+	public void valorDeveAcrescentar01SeCompraMenor3ItensEClienteSP() {
+		compra = new CompraBuilder("SP").add(10).add(20).build();
+
+		valor = calc.calcula(compra);
+
+		Assert.assertEquals(30.0 * 1.1, valor, 0.001);
 	}
 }
