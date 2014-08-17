@@ -31,6 +31,12 @@ public class CalculadoraDeCompraTest {
 		Assert.assertEquals(60.0, valor, 0.001);
 	}
 
+	@Test(expected = IllegalArgumentException.class)
+	public void compraNulaDeveLancarIllegalArgumentException() {
+		compra = new CompraBuilder().add(2001).build();
+		calc = new CalculadoraDeCompra(null, frete, desconto);
+	}
+
 	@Test
 	public void valorDeveAcrescentar010SeCompraMenor3ItensEClienteSP() {
 		compra = new CompraBuilder().add(10).add(20).build();
@@ -39,6 +45,12 @@ public class CalculadoraDeCompraTest {
 		valor = calc.calcula();
 
 		Assert.assertEquals(30.0 * 1.10, valor, 0.001);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void freteNuloDeveLancarIllegalArgumentException() {
+		compra = new CompraBuilder().add(2001).build();
+		calc = new CalculadoraDeCompra(compra, null, desconto);
 	}
 
 	@Test
