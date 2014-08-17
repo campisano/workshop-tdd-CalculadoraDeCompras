@@ -130,6 +130,18 @@ public class CalculadoraDeCompraTest {
 		Assert.assertEquals(100.0 * 1.22, valor, 0.001);
 	}
 
+	// Restante tests
+
+	@Test
+	public void valorDeveAcrescentar025SeComprarParaRestante() {
+		compra = new CompraBuilder().add(100).build();
+		frete = new FreteBuilder().build("Restante");
+		calc = new CalculadoraDeCompra(compra, frete, desconto);
+		valor = calc.calcula();
+
+		Assert.assertEquals(100.0 * 1.25, valor, 0.001);
+	}
+
 	// ///////////////
 	// Desconto tests
 	// ///////////////

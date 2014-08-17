@@ -10,5 +10,4 @@ public class FreteRJ implements IFrete {
 
 		return compra.getValor() * frete;
 	}
-
 }

@@ -11,5 +11,4 @@ public class FreteSP implements IFrete {
 
 		return compra.getValor() * frete;
 	}
-
 }
