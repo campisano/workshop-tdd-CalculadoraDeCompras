@@ -1,9 +1,15 @@
-
 public class DescontoPorValor implements IDesconto {
 
 	public double getValor(Compra compra) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
+		double desconto;
+
+		if (compra.getValor() <= 500) {
+			desconto = compra.getValor() * 0.05;
+		} else {
+			desconto = compra.getValor() * 0.1;
+		}
+
+		return desconto;
+	}
 }
