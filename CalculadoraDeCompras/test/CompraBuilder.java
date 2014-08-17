@@ -3,9 +3,19 @@ import java.util.List;
 
 public class CompraBuilder {
 
+	private Cliente cliente;
 	private List<Item> items;
 
 	public CompraBuilder() {
+		init("?");
+	}
+
+	public CompraBuilder(String estado) {
+		init(estado);
+	}
+
+	private void init(String estado) {
+		cliente = new Cliente(estado);
 		items = new ArrayList<Item>();
 	}
 
@@ -16,6 +26,6 @@ public class CompraBuilder {
 	}
 
 	public Compra build() {
-		return new Compra(items);
+		return new Compra(cliente, items);
 	}
 }
