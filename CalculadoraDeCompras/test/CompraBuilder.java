@@ -1,16 +1,21 @@
+import java.util.ArrayList;
 import java.util.List;
-
 
 public class CompraBuilder {
 
-	public CompraBuilder add(int i) {
-		// TODO Auto-generated method stub
-		return null;
+	private List<Item> items;
+
+	public CompraBuilder() {
+		items = new ArrayList<Item>();
 	}
 
-	public List<Compras> build() {
-		// TODO Auto-generated method stub
-		return null;
+	public CompraBuilder add(int valor) {
+		items.add(new Item(valor));
+
+		return this;
 	}
 
+	public Compra build() {
+		return new Compra(items);
+	}
 }
