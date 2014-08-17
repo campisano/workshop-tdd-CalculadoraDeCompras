@@ -118,6 +118,18 @@ public class CalculadoraDeCompraTest {
 		Assert.assertEquals(40.0 * 1.15, valor, 0.001);
 	}
 
+	// Sul do país tests
+
+	@Test
+	public void valorDeveAcrescentar022SeComprarParaSUL() {
+		compra = new CompraBuilder().add(100).build();
+		frete = new FreteBuilder().build("Sul do país");
+		calc = new CalculadoraDeCompra(compra, frete, desconto);
+		valor = calc.calcula();
+
+		Assert.assertEquals(100.0 * 1.22, valor, 0.001);
+	}
+
 	// ///////////////
 	// Desconto tests
 	// ///////////////

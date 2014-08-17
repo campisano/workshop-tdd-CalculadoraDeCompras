@@ -5,6 +5,8 @@ public class FreteBuilder {
 			return new FreteSP();
 		} else if (estado_destino == "RJ") {
 			return new FreteRJ();
+		} else if (estado_destino == "Sul do país") {
+			return new FreteSUL();
 		}
 
 		return null;
