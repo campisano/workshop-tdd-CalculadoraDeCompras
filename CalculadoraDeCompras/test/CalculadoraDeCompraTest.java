@@ -100,4 +100,10 @@ public class CalculadoraDeCompraTest {
 
 		Assert.assertEquals(2001.0 * 0.85, valor, 0.001);
 	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void descontoNuloDeveLancarIllegalArgumentException() {
+		compra = new CompraBuilder().add(2001).build();
+		calc = new CalculadoraDeCompra(compra, frete, null);
+	}
 }

@@ -5,6 +5,11 @@ public class CalculadoraDeCompra {
 	private IDesconto desconto;
 
 	public CalculadoraDeCompra(Compra compra, IFrete frete, IDesconto desconto) {
+
+		if (desconto == null) {
+			throw new IllegalArgumentException("Desconto não pode ser nulo!");
+		}
+
 		this.compra = compra;
 		this.frete = frete;
 		this.desconto = desconto;
