@@ -45,6 +45,16 @@ public class CalculadoraDeCompraTest {
 	// Frete tests
 	// ////////////
 
+	// null test
+
+	@Test(expected = IllegalArgumentException.class)
+	public void freteNuloDeveLancarIllegalArgumentException() {
+		compra = new CompraBuilder().add(2001).build();
+		calc = new CalculadoraDeCompra(compra, null, desconto);
+	}
+
+	// SP tests
+
 	@Test
 	public void valorDeveAcrescentar010SeCompraMenosQue3ItensEClienteSP() {
 		compra = new CompraBuilder().add(10).add(20).build();
@@ -75,15 +85,52 @@ public class CalculadoraDeCompraTest {
 		Assert.assertEquals(30.0 * 1.17, valor, 0.001);
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void freteNuloDeveLancarIllegalArgumentException() {
-		compra = new CompraBuilder().add(2001).build();
-		calc = new CalculadoraDeCompra(compra, null, desconto);
+	// RJ tests
+
+	@Test
+	public void valorDeveAcrescentar011SeCompraMenosQue3ItensEClienteSP() {
+		compra = new CompraBuilder().add(10).add(10).add(20).build();
+		frete = new FreteBuilder().build("RJ");
+		calc = new CalculadoraDeCompra(compra, frete, desconto);
+		valor = calc.calcula();
+
+		Assert.assertEquals(40.0 * 1.11, valor, 0.001);
+	}
+
+	@Test
+	public void valorDeveAcrescentar011SeCompra3ItensEClienteSP() {
+		compra = new CompraBuilder().add(10).add(10).add(10).add(10).build();
+		frete = new FreteBuilder().build("RJ");
+		calc = new CalculadoraDeCompra(compra, frete, desconto);
+		valor = calc.calcula();
+
+		Assert.assertEquals(40.0 * 1.11, valor, 0.001);
+	}
+
+	@Test
+	public void valorDeveAcrescentar015SeCompraMaisQue3ItensEClienteSP() {
+		compra = new CompraBuilder().add(10).add(15).add(5).add(5).add(5)
+				.build();
+		frete = new FreteBuilder().build("RJ");
+		calc = new CalculadoraDeCompra(compra, frete, desconto);
+		valor = calc.calcula();
+
+		Assert.assertEquals(40.0 * 1.15, valor, 0.001);
 	}
 
 	// ///////////////
 	// Desconto tests
 	// ///////////////
+
+	// null test
+
+	@Test(expected = IllegalArgumentException.class)
+	public void descontoNuloDeveLancarIllegalArgumentException() {
+		compra = new CompraBuilder().add(2001).build();
+		calc = new CalculadoraDeCompra(compra, frete, null);
+	}
+
+	// <= 500 tests
 
 	@Test
 	public void valorDeveSubtrair005ParaValorAte500() {
@@ -104,6 +151,8 @@ public class CalculadoraDeCompraTest {
 
 		Assert.assertEquals(500.0 * 0.95, valor, 0.001);
 	}
+
+	// > 500 <= 2000 tests
 
 	@Test
 	public void valorDeveSubtrair010ParaValorMaiorQue500() {
@@ -135,6 +184,8 @@ public class CalculadoraDeCompraTest {
 		Assert.assertEquals(2000.0 * 0.90, valor, 0.001);
 	}
 
+	// > 2000 tests
+
 	@Test
 	public void valorDeveSubtrair015ParaValorMaiorQue2000() {
 		compra = new CompraBuilder().add(2001).build();
@@ -143,11 +194,5 @@ public class CalculadoraDeCompraTest {
 		valor = calc.calcula();
 
 		Assert.assertEquals(2001.0 * 0.85, valor, 0.001);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void descontoNuloDeveLancarIllegalArgumentException() {
-		compra = new CompraBuilder().add(2001).build();
-		calc = new CalculadoraDeCompra(compra, frete, null);
 	}
 }
