@@ -23,4 +23,8 @@ public class Compra {
 
 		return valor;
 	}
+
+	public int getNumItens() {
+		return items.size();
+	}
 }

@@ -7,11 +7,7 @@ public class CompraBuilder {
 	private List<Item> items;
 
 	public CompraBuilder() {
-		init("?");
-	}
-
-	public CompraBuilder(String estado) {
-		init(estado);
+		init("estado... pode morar em qualquer lugar, dessa forma ter uma interface de frete faz mais sentido");
 	}
 
 	private void init(String estado) {

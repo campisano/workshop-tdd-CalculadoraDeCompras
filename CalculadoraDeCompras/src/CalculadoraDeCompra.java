@@ -1,11 +1,16 @@
 public class CalculadoraDeCompra {
 
-	public CalculadoraDeCompra(IFrete frete, IDesconto desconto) {
+	private Compra compra;
+	private IFrete frete;
+
+	public CalculadoraDeCompra(Compra compra, IFrete frete) {
+		this.compra = compra;
+		this.frete = frete;
 	}
 
-	public double calcula(Compra compra) {
+	public double calcula() {
 		// compra.valor + frete(compra) - desconto(conta);
 
-		return compra.getValor();
+		return compra.getValor() + frete.getValor(compra);
 	}
 }
