@@ -6,8 +6,10 @@ public class DescontoPorValor implements IDesconto {
 
 		if (compra.getValor() <= 500) {
 			desconto = compra.getValor() * 0.05;
-		} else {
+		} else if (compra.getValor() <= 2000) {
 			desconto = compra.getValor() * 0.1;
+		} else {
+			desconto = compra.getValor() * 0.15;
 		}
 
 		return desconto;
